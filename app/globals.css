@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+
+body{
+  background-color: #6D899E;
+  margin: 0;
+  height: 100vh;
+}
+
+main{
+  display: flex;
+  justify-self: right;
+  align-items: center;
+}
+
+.form{
+  font-family: "Kaushan Script", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: larger;
+  width: 30vw;
+  text-align: center;
+}
+
+.back{
+  width: 70vw;
+  height: 100vh;
+  object-fit: fill;
+}
+
+.form > div> h1{
+  color: #4E4E4E;
+  margin: 0;
+}
+
+.form > h3{
+  margin: 0;
+}
+
+.form > div> input, .form > div> .password> input{
+  margin: 10px;
+  height: 30px;
+  width: 70%;
+  border: none;
+  outline: none;
+  font-family: "Kaushan Script", cursive;
+  font-weight: 400;
+  padding: 5px;
+}
+
+.password> input{
+  width: 50%;
+  margin: 0;
+  border: none;
+  outline: none;
+}
+
+.password > span{
+  display: inline-block;
+  background-color: white;
+  height: 30px;
+  width: 20%;
+}
+
+.password{
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 72%;
+  height: 40px;
+  margin-left: 4vw;
+}
+
+.form > div> input:focus,.password>input:focus, .inps>input:focus{
+  font-family: sans-serif;
+}
+
+.login{
+  margin-top: 20px;
+  background-color: #74191E;
+}
+
+.login:hover {
+  background-color: #350a0c;
+  cursor: pointer;
+}
+
+.set_up{
+  background-color: #09253B;
+}
+
+.set_up:hover {
+  background-color: #04111b;
+  cursor: pointer;
+}
+
+button{
+  width: 75%;
+  height: 5vh;
+  font-family: "Kaushan Script", cursive;
+  font-weight: bolder;
+  font-size: larger;
+  color: white;
+  border: none;
+  outline: none;
+}
+
+.or{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.or>p{
+  margin: 5px;
+}
+.line{
+  height: 2px;
+  width: 25%;
+  background-color: black;
+}
+
+.form > h3{
+  margin-top: 15px;
+}
+
+.is-admin{
+  display: flex;
+  justify-content: center;
+}
+
+.nav{
+  background-color: #09253B;
+  display: flex;
+  flex-direction: column;
+  color: wheat;
+  height: 100vh;
+  width: 20vw;
+}
+
+.nav > div{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.nav > div:hover {
+  background-color: wheat;
+  color: #09253B;
+  cursor: pointer;
+}
+
+.main{
+  display: flex;
+}
+
+@media only screen and (max-width: 900px) {
+  main{
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100vw;
+  }
+  .back{
+    height: 40vh;
+    width: 100vw;
+  }
+  .form{
+    width: 100vw;
+  }
+
+  .main{
+    display: flex;
+    flex-direction: column;
+  }
+}
