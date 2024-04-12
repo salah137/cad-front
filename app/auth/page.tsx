@@ -55,7 +55,7 @@ export default function page() {
                 <button className="login" onClick={
                     async () => {
 
-                        let res = await fetch("http://localhost:5000/signIn", {
+                        let res = await fetch(`${process.env.NEXT_PUBLIC_URL}/signIn`, {
                             method: "POST",
                             headers: {
                                 'Accept': 'application/json',

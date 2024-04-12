@@ -129,30 +129,6 @@ button{
   justify-content: center;
 }
 
-.nav{
-  background-color: #09253B;
-  display: flex;
-  flex-direction: column;
-  color: wheat;
-  height: 100vh;
-  width: 20vw;
-}
-
-.nav > div{
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-}
-
-.nav > div:hover {
-  background-color: wheat;
-  color: #09253B;
-  cursor: pointer;
-}
-
-.main{
-  display: flex;
-}
 
 @media only screen and (max-width: 900px) {
   main{

@@ -114,7 +114,7 @@ export default function page() {
             
             if (!(password == "" && name == "" && cellule == "" && email == "") && validateEmail(email) && password.length >= 8 && (((isAdmin && code == c) || (!isAdmin)))) {
 
-              let res = await fetch("http://localhost:5000/signUp", {
+              let res = await fetch(`${process.env.NEXT_PUBLIC_URL}/signUp`, {
                 method: "POST",
                 headers: {
                   'Accept': 'application/json',
@@ -133,7 +133,7 @@ export default function page() {
 
               let data = await res.json()
 
-              if (data == "Invalid email or password" || data == "'Email address is already in use.'") {
+              if (data == "Invalid email or password" || data == "Email address is already in use.") {
                 setErr(true)
               } else {
                 localStorage.setItem("token",data["token"])
