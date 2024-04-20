@@ -147,7 +147,8 @@ export default function page() {
 
                     <div className="select-img" id="img-up" onClick={
                         () => {
-                            document.querySelector("#file-upload")!.click()
+                            let element: HTMLElement = document.querySelector("#file-upload") as HTMLElement;
+                            element.click()
                         }
                     }>
                         <input type="file" accept="image/*" id="file-upload" hidden onChange={
@@ -166,7 +167,8 @@ export default function page() {
                     </div>
                     <div className="select-img" id="vid-up" onClick={
                         () => {
-                            document.querySelector("#file-upload-vid")!.click()
+                            let element: HTMLElement = document.querySelector("#file-upload-vid") as HTMLElement;
+                            element.click()
                         }
                     }>
                         <input type="file" id="file-upload-vid" hidden onChange={
@@ -199,7 +201,9 @@ export default function page() {
 
                     <div className="select-img" id="file-up" onClick={
                         () => {
-                            document.querySelector("#file-upload-pdf")!.click()
+                            //#file-upload-pdf
+                            let element: HTMLElement = document.querySelector("#file-upload-pdf") as HTMLElement;
+                            element.click()
                         }
                     }>
                         <input type="file" accept="application/pdf" id="file-upload-pdf" hidden onChange={

@@ -130,7 +130,8 @@ export default function page() {
 
                     <div className="select-img" onClick={
                         () => {
-                            document.querySelector("#file-upload")!.click()
+                            let element: HTMLElement = document.querySelector("#file-upload") as HTMLElement;
+                            element.click()
                         }
                     }>
                         <input type="file" accept="image/* && video/*" id="file-upload" hidden onChange={
