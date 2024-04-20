@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+
 .btn {
     position: fixed;
     display: flex;
@@ -179,14 +181,222 @@
     /* Firefox */
 }
 
+.tutorials {
+    width: 100%;
+}
+
+.chose-tuto {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-tuto {
+    width: 25vw;
+    height: 40vh;
+}
+
+.tut-elem-design,
+.tut-elem-art {
+    color: wheat;
+    text-decoration: none;
+    text-align: center;
+    border: 5px solid wheat;
+    border-radius: 5px;
+    font-family: "Kaushan Script", cursive;
+    margin: 5px;
+}
+
+.tut-elem-design {
+    background-color: #09253B;
+}
+
+.tut-elem-art {
+    background-color: #74191E;
+}
+
+.tut-elem-design:hover {
+    background-color: #2f526b;
+}
+
+.tut-elem-art:hover {
+    background-color: #3b1b1b;
+
+}
+
+.tuto {
+    width: 20vw;
+    background-color: wheat;
+    border-radius: 5px;
+    text-align: center;
+    color: #09253B;
+    margin: 5px;
+    border: 1px solid wheat;
+    text-decoration: none;
+}
+
+.tuto:hover {
+    background-color: rgb(126, 106, 68);
+    cursor: pointer;
+
+}
+
+.tutorials-list {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+
+}
+
+.tuto-img {
+    width: 100%;
+    object-fit: fill;
+    height: 20vh;
+    border-radius: 5px;
+
+}
+
+.tuto>h2,
+.tuto>h4 {
+    margin: 0;
+
+}
+
+#vid-up,
+#img-up {
+    height: 20vh;
+}
+
+#file-up {
+    height: 10vh;
+}
+
+.show-pdf {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.80rem;
+}
+
+.tuto-item {
+    display: flex;
+    width: 70vw;
+    color: wheat;
+    background-color: #2f526b;
+    margin-left: 15px;
+    border: 2px solid wheat;
+    text-decoration: none;
+
+    word-wrap: break-word;
+}
+
+.tuto-item {
+    margin: 5px;
+}
+
+.tuto-item:hover {
+    cursor: pointer;
+    background-color: #20303b;
+
+}
+
+.tuto-items-list {
+    height: 100vh;
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+}
+
+.tuto-items-list::-webkit-scrollbar {
+    display: none;
+}
+
+.watching {
+    display: flex;
+    justify-content: center;
+}
+
+.video {
+    background-color: #041826;
+}
+
+.files {
+    height: 40vh;
+    border: 3px solid wheat;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.pdf {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 12.5vw;
+    margin: 5PX;
+    border: 2PX solid wheat;
+    padding: 5px;
+}
+
+.pdf:hover{
+    background-color: #2f526b;
+    cursor: pointer;
+}
+
+.files>h1 {
+    width: 100%;
+    padding: 5px;
+    border: 3px solid wheat;
+}
+
+
 
 @media only screen and (max-width: 900px) {
+
+    .pdf {
+        width: 25vw;
+        font-size: 1rem;
+
+    }
+
+    .tutorials-list {
+        display: grid;
+        grid-template-columns: auto auto;
+
+    }
+
+    .tuto {
+        width: 40vw;
+    }
+
+    .tuto-item {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        width: 60vw;
+
+    }
+
+
+    .pdf {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .tuto-item>* {
+        width: 100%;
+    }
+
     .nav {
         display: flex;
         flex-direction: row;
         width: 100vw;
         height: 10vh;
+        align-items: center;
         justify-content: space-around;
+        margin-left: 10px;
     }
 
     .nav>div {
@@ -231,5 +441,22 @@
 
     .annonce-item {
         width: 85vw;
+    }
+
+    .chose-tuto {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .logo-tuto {
+        width: 60vw;
+        height: 25vh;
+    }
+
+    .show-pdf {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.70rem;
     }
 }

@@ -1,15 +1,16 @@
 "use client"
-
-import { IoMdAdd } from "react-icons/io";
-import firebase_app from "../../firebsae-config"
 import { useEffect, useState } from "react";
-import { FaFileUpload } from "react-icons/fa";
-import Image from "next/image";
 import { BiExit } from "react-icons/bi";
-import { getDownloadURL, getStorage, ref, uploadBytesResumable, uploadBytes } from 'firebase/storage'
-import { useRouter } from "next/navigation";
+import { IoMdAdd } from "react-icons/io";
+import Image from "next/image";
+import { FaFileUpload } from "react-icons/fa";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import firebase_app from "@/app/firebsae-config";
+import { useParams } from 'next/navigation'
+import Link from "next/link";
 
 export default function page() {
+    const params = useParams<{ topic: string }>()
 
     const [add, setAdd] = useState(false)
     const [image, setImage] = useState<any>()
@@ -18,34 +19,27 @@ export default function page() {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
 
-    const [annonces, setAnnonces] = useState([])
-
     const userType = localStorage.getItem('type');
-    const idd = Number(localStorage.getItem("id"))
-    const token = localStorage.getItem("token")
     const userTypeNumber = userType ? parseInt(userType) : null;
+    const id = Number(localStorage.getItem("id"))
+    const token = localStorage.getItem("token")
+
+    const [tutorials, setTutorials] = useState([])
+
+    useEffect(
+        () => {
+            getTutorial()
+            console.log(tutorials);
+
+
+        }, []
+    )
 
     let headers = {
         Accept: "application/json", // Example header
         "Content-Type": "application/json",
         'Authorization': `${token}`
     };
-    const getData = () => {
-        (async () => {
-            let res = await fetch(`${process.env.NEXT_PUBLIC_URL}/annonce/getAnnonce`, {
-                method: "GET",
-                headers: headers,
-            }
-            )
-            setAnnonces(await res.json())
-        })()
-    }
-
-    useEffect(
-        () => {
-            getData()
-        }, []
-    )
 
     const uploadImage = async () => {
         const metadata = {
@@ -57,30 +51,48 @@ export default function page() {
 
         const storage = getStorage(firebase_app)
         const fileRef = ref(storage, `images/${title}`)
-
         uploadBytes(fileRef, image, metadata)
         await uploadBytes(fileRef, image, metadata)
         return (await getDownloadURL(fileRef));
     }
 
-    const shareAnnonce = async () => {
+    const createTutotial = async () => {
         if (title && description && file) {
-
-
-            const url = await uploadImage()
-            await fetch(`${process.env.NEXT_PUBLIC_URL}/annonce/addAnnonce`, {
-                method: "POST",
+            const img = await uploadImage()
+            await fetch(`${process.env.NEXT_PUBLIC_URL}/tutorial/addTutorial`, {
                 headers: headers,
+                method: "POST",
                 body: JSON.stringify({
                     "title": title,
                     "description": description,
-                    "files": url,
-                    "authorId": idd
-                }),
+                    "image": img,
+                    "topic": params.topic
+                })
             })
-            getData()
-            setAdd(false)
+
         }
+    }
+
+    const getTutorial = () => {
+        (async () => {
+            const searchParams = new URLSearchParams({
+                topic: params.topic,
+            });
+
+            const url = `${process.env.NEXT_PUBLIC_URL}/tutorial/getTutorials?topic=${params.topic}`;
+
+            const data = await fetch(
+                url, {
+                headers: headers,
+                method: "GET",
+
+            }
+            )
+            let ddd =(await data.json());
+            console.log(ddd);
+            
+            setTutorials(ddd)
+        })()
     }
 
     return <main>
@@ -104,13 +116,13 @@ export default function page() {
                         }
                     } />
 
-                    <input type="text" placeholder="annonce title" onChange={
+                    <input type="text" placeholder="tutorial title" onChange={
                         (e) => {
                             setTitle(e.target.value)
                         }
                     }></input>
 
-                    <textarea className="desc" placeholder="annonce discription" onChange={
+                    <textarea className="desc" placeholder="tutorial description" onChange={
                         (e) => {
                             setDescription(e.target.value)
                         }
@@ -136,8 +148,12 @@ export default function page() {
                     </div>
 
                     <button onClick={
-                        () => {
-                            shareAnnonce()
+                        async () => {
+                            console.log("Hi");
+
+                            await createTutotial()
+                            await getTutorial()
+                            setAdd(false)
                         }
                     }>
                         <IoMdAdd />
@@ -146,24 +162,20 @@ export default function page() {
                 </div>
                 : <></>
         }
-
-        <div className="anns" style={
-            {
-                display : add?"none":"block",
-            
-            }
-        }>
-            {
-                annonces.map(
-                    (e) => {
-                        return <div className="annonce-item">
-                            <h1>{e["title"]} c </h1>
-                            <p>{e["description"]}</p>
-                            <Image src={e["files"]} alt="ann-img" width={600} height={350} className="ann-img" />
-                        </div>
-
-                    }
-                )
-            }</div>
+        <div className="tutorials-list">
+            {(tutorials && !add) && (
+                <div className="tutorials-list">
+                    {tutorials.map((e) => {
+                        return (
+                            <Link className="tuto"  href={`/home/tutorials/${params.topic}/${e["id"]}`}>
+                                <Image className="tuto-img" src={e["image"]} alt="img"  width={200} height={200}/>
+                                <h2>{e["title"]}</h2>
+                                <h4>{e["description"]}</h4>
+                            </Link>
+                        );
+                    })}
+                </div>
+            )}
+        </div>
     </main>
 }
