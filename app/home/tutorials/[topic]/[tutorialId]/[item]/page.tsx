@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { FaFilePdf } from "react-icons/fa6"
 import ReactPlayer from "react-player"
 import Image from "next/image"
+import { useParams } from "next/navigation"
 
 export default function page() {
     const params = useParams<{ topic: string, tutorialId: string, item: string }>()
