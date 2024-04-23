@@ -7,6 +7,7 @@ import { FaFileUpload } from "react-icons/fa";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import firebase_app from "@/app/firebsae-config";
 import Link from "next/link";
+import { useParams } from "next/navigation"
 
 export default function page() {
     const params = useParams<{ topic: string }>()

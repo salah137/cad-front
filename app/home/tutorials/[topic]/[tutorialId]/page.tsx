@@ -13,6 +13,7 @@ import ReactPlayer from "react-player"
 import { AiOutlineLoading3Quarters } from "react-icons/ai"
 import Link from "next/link"
 
+import { useParams } from "next/navigation"
 
 export default function page() {
     const params = useParams<{ topic: string, tutorialId: string }>()
