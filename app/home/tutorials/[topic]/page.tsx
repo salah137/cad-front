@@ -6,7 +6,6 @@ import Image from "next/image";
 import { FaFileUpload } from "react-icons/fa";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import firebase_app from "@/app/firebsae-config";
-import { useParams } from 'react-router-dom'
 import Link from "next/link";
 
 export default function page() {

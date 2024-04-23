@@ -1,6 +1,5 @@
 "use client"
 
-import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { IoMdAdd } from "react-icons/io"
 import Image from "next/image"

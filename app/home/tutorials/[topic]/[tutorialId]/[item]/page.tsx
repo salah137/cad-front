@@ -1,6 +1,5 @@
 "use client"
 
-import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { FaFilePdf } from "react-icons/fa6"
 import ReactPlayer from "react-player"
