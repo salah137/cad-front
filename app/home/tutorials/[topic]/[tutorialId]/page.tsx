@@ -1,6 +1,6 @@
 "use client"
 
-import { useParams } from "next/navigation"
+import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { IoMdAdd } from "react-icons/io"
 import Image from "next/image"
@@ -13,6 +13,8 @@ import { PiFilePdfBold } from "react-icons/pi"
 import ReactPlayer from "react-player"
 import { AiOutlineLoading3Quarters } from "react-icons/ai"
 import Link from "next/link"
+
+
 export default function page() {
     const params = useParams<{ topic: string, tutorialId: string }>()
 
@@ -30,13 +32,13 @@ export default function page() {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
 
-    const userType = localStorage.getItem('type');
-    const userTypeNumber = userType ? parseInt(userType) : null;
-
-    const id = Number(localStorage.getItem("id"))
-    const token = localStorage.getItem("token")
-
     const [pub, setPub] = useState(false)
+
+    const [userType, setUserType] = useState<any>()
+
+    const [id, setId] = useState<any>()
+    const [token, setToken] = useState<any>()
+
 
     let headers = {
         Accept: "application/json", // Example header
@@ -84,9 +86,6 @@ export default function page() {
 
     const getItems = () => {
         (async () => {
-            const searchParams = new URLSearchParams({
-                topic: params.topic,
-            });
 
 
             const url = `${process.env.NEXT_PUBLIC_URL}/tutorial/getTutorial?id=${Number(params.tutorialId)}`;
@@ -107,13 +106,19 @@ export default function page() {
 
     useEffect(
         () => {
+            if (typeof window !== 'undefined') {
+                setUserType(localStorage.getItem('type'));
+                setId(Number(localStorage.getItem("id")))
+                setToken(localStorage.getItem("token"))
+            }
+
             getItems()
         }, []
     )
 
 
     return <main>
-        {userTypeNumber == 1 && !add ?
+        {userType == "1" && !add ?
             <div className="btn" onClick={
                 () => {
                     setAdd(true)

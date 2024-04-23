@@ -6,7 +6,7 @@ import Image from "next/image";
 import { FaFileUpload } from "react-icons/fa";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import firebase_app from "@/app/firebsae-config";
-import { useParams } from 'next/navigation'
+import { useParams } from 'react-router-dom'
 import Link from "next/link";
 
 export default function page() {
@@ -18,16 +18,20 @@ export default function page() {
 
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
-
-    const userType = localStorage.getItem('type');
-    const userTypeNumber = userType ? parseInt(userType) : null;
-    const id = Number(localStorage.getItem("id"))
-    const token = localStorage.getItem("token")
+    const [userType,setUserType] = useState<any>()
+    const [token,setToken] = useState<any>()
+    const [id,setId]=useState<any>()
 
     const [tutorials, setTutorials] = useState([])
 
     useEffect(
         () => {
+            if (typeof window !== 'undefined'){
+            setUserType(localStorage.getItem('type'));
+            setId(Number(localStorage.getItem("id")))
+           setToken(localStorage.getItem("token"))
+            }
+        
             getTutorial()
             console.log(tutorials);
 
@@ -75,10 +79,6 @@ export default function page() {
 
     const getTutorial = () => {
         (async () => {
-            const searchParams = new URLSearchParams({
-                topic: params.topic,
-            });
-
             const url = `${process.env.NEXT_PUBLIC_URL}/tutorial/getTutorials?topic=${params.topic}`;
 
             const data = await fetch(
@@ -96,7 +96,7 @@ export default function page() {
     }
 
     return <main>
-        {userTypeNumber == 1 && !add ?
+        {userType == "1" && !add ?
             <div className="btn" onClick={
                 () => {
                     setAdd(true)

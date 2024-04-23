@@ -7,7 +7,6 @@ import { FaFileUpload } from "react-icons/fa";
 import Image from "next/image";
 import { BiExit } from "react-icons/bi";
 import { getDownloadURL, getStorage, ref, uploadBytesResumable, uploadBytes } from 'firebase/storage'
-import { useRouter } from "next/navigation";
 
 export default function page() {
 
@@ -20,9 +19,9 @@ export default function page() {
 
     const [annonces, setAnnonces] = useState([])
 
-    const userType = localStorage.getItem('type');
-    const idd = Number(localStorage.getItem("id"))
-    const token = localStorage.getItem("token")
+    const [userType, setUserType] = useState<any>();
+    const [idd, setIdd] = useState<any>()
+    const [token, setToken] = useState<any>()
     const userTypeNumber = userType ? parseInt(userType) : null;
 
     let headers = {
@@ -31,6 +30,8 @@ export default function page() {
         'Authorization': `${token}`
     };
     const getData = () => {
+
+
         (async () => {
             let res = await fetch(`${process.env.NEXT_PUBLIC_URL}/annonce/getAnnonce`, {
                 method: "GET",
@@ -43,6 +44,12 @@ export default function page() {
 
     useEffect(
         () => {
+            if (typeof window !== 'undefined'){
+                setUserType(localStorage.getItem('type'));
+                setIdd(Number(localStorage.getItem("id")))
+                setToken(localStorage.getItem("token"));
+        
+            }
             getData()
         }, []
     )
@@ -150,8 +157,8 @@ export default function page() {
 
         <div className="anns" style={
             {
-                display : add?"none":"block",
-            
+                display: add ? "none" : "block",
+
             }
         }>
             {

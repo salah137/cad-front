@@ -2,18 +2,21 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import firebase_app from "./firebsae-config"
+import { useEffect } from "react"
 
 export default function page() {
   const router = useRouter()
-
-  if (!localStorage.getItem("token")) {
-    router.push("/auth")
-  }
-
-  else{
-    router.push("/home")
-    
-  }
-  return <main>  </main>
+ 
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      router.push("/auth");
+    } else {
+      router.push("/home");
+    }
+  }, []); 
+    return <main> HI  </main>
 }
+
+
+
+

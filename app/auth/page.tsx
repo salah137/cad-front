@@ -74,12 +74,12 @@ export default function page() {
                         if (data == "Invalid email or password") {
                             setErr(true)
                         } else {
-                            console.log(data["token"], data["id"], data["type"]);
+                            if (typeof window !== 'undefined'){
                             localStorage.setItem("token", data["token"])
                             localStorage.setItem("id", data["id"])
                             localStorage.setItem("type", data["type"])
                             router.push("/home")
-                        }
+                        }}
 
                     }
                 }>

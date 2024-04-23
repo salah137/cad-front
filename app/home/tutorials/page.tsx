@@ -1,4 +1,5 @@
-import { getDownloadURL, getStorage, ref } from 'firebase/storage'
+"use client"
+
 import Image from 'next/image'
 import logo from "../../assets/images/cad-logo.png"
 import Link from 'next/link'

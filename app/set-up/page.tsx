@@ -18,13 +18,13 @@ export default function page() {
   const [isAdmin, setAdmin] = useState(false)
   const [code, setCode] = useState("")
   const router = useRouter()
-  const [c,setC] = useState<any>()
+  const [c, setC] = useState<any>()
   useEffect(
-    ()=>{
+    () => {
       setC(process.env.NEXT_PUBLIC_ADMIN_CODE)
-    },[]
+    }, []
   )
-  
+
   return <main>
     <div className="form">
 
@@ -62,7 +62,7 @@ export default function page() {
                 <FaLock />
             }
           </span>
-      
+
         </div>
         {passErr ?
           <h3>password shouldd have more than 8 characters</h3> : <></>}
@@ -109,9 +109,9 @@ export default function page() {
           async () => {
             console.log("hi");
             console.log(c);
-            
+
             console.log((((isAdmin && code == c) || (!isAdmin))));
-            
+
             if (!(password == "" && name == "" && cellule == "" && email == "") && validateEmail(email) && password.length >= 8 && (((isAdmin && code == c) || (!isAdmin)))) {
 
               let res = await fetch(`${process.env.NEXT_PUBLIC_URL}/signUp`, {
@@ -136,11 +136,13 @@ export default function page() {
               if (data == "Invalid email or password" || data == "Email address is already in use.") {
                 setErr(true)
               } else {
-                localStorage.setItem("token",data["token"])
-                localStorage.setItem("id",data["id"])
-                localStorage.setItem("type",data["type"])
-                console.log(data["token"],data["id"],data["type"]);
-                router.push("/home")
+                if (typeof window !== 'undefined') {
+                  localStorage.setItem("token", data["token"])
+                  localStorage.setItem("id", data["id"])
+                  localStorage.setItem("type", data["type"])
+                  console.log(data["token"], data["id"], data["type"]);
+                  router.push("/home")
+                }
               }
 
 
