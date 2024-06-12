@@ -5,37 +5,27 @@ import { FaFilePdf } from "react-icons/fa6"
 import ReactPlayer from "react-player"
 import Image from "next/image"
 import { useParams } from "next/navigation"
+import firebase_app from "@/app/firebsae-config"
+import { getFirestore, getDoc, doc, collection, getDocs, query } from "firebase/firestore"
 
 export default function page() {
     const params = useParams<{ topic: string, tutorialId: string, item: string }>()
     const [iteme, setIteme] = useState<any>()
-    const [token, settoken] = useState<any>()
+    const [user, setUser] = useState<any>()
+    const db = getFirestore(firebase_app)
 
-    let headers = {
-        Accept: "application/json", // Example header
-        "Content-Type": "application/json",
-        'Authorization': `${token}`
-    };
 
-    useEffect(
-        () => {
-            (
-                async () => {
-                    if (typeof window !== 'undefined') {
-                        settoken(localStorage.getItem("token"))
-                    }
-                    let res = await fetch(`${process.env.NEXT_PUBLIC_URL}/tutorial/getTutorialElement?id=${params.item}`, {
-                        method: "GET",
-                        headers
-                    })
-                    let data = await res.json()
-                    console.log(data);
-                    setIteme(data)
-                }
-            )()
-        }, []
-    )
 
+
+
+    useEffect(() => {
+        (async () => {
+            const docs = await getDoc(doc(db, `${params.topic}/${params.tutorialId}/videos/${params.item}`))
+
+            setIteme(docs.data())
+        })()
+
+    }, []);
     return <main>
         {
             iteme && <div className="watching">
@@ -53,13 +43,16 @@ export default function page() {
                     <h1>{iteme["title"]}</h1>
                     <div className="files">
 
-                        <div className="pdf">
-                            <FaFilePdf />
-                            <h3>Check our docs</h3>
-                        </div>
+                        <a href={iteme["pdf"]} target="_blank" rel="noopener noreferrer">
+                            <div className="pdf">
+                                <FaFilePdf />
+                                <h3>Check our docs</h3>
+                            </div>
+                        </a>
 
-                        <div className="img">
-                            <Image src={iteme["image"]} alt={""} width={300} height={300} />
+                        <div className="text">
+                            <h1>{params.item}</h1>
+                            {iteme["description"]}
                         </div>
                     </div>
                 </div>

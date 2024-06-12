@@ -7,10 +7,13 @@ import { FaFileUpload } from "react-icons/fa";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import firebase_app from "@/app/firebsae-config";
 import Link from "next/link";
-import { useParams } from "next/navigation"
+import { useParams } from 'next/navigation';
+import { query, collection, getDocs, getFirestore, getDoc, doc, setDoc } from "firebase/firestore";
 
 export default function page() {
     const params = useParams<{ topic: string }>()
+
+    const db = getFirestore(firebase_app)
 
     const [add, setAdd] = useState(false)
     const [image, setImage] = useState<any>()
@@ -18,32 +21,29 @@ export default function page() {
 
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
-    const [userType,setUserType] = useState<any>()
-    const [token,setToken] = useState<any>()
-    const [id,setId]=useState<any>()
+    const [user,setUser]=useState<any>()
+    const [tutorials, setTutorials] = useState<any>()
 
-    const [tutorials, setTutorials] = useState([])
 
-    useEffect(
-        () => {
-            if (typeof window !== 'undefined'){
-            setUserType(localStorage.getItem('type'));
-            setId(Number(localStorage.getItem("id")))
-           setToken(localStorage.getItem("token"))
-            }
+    useEffect(() => {
+        (async () => {
+            const db = getFirestore(firebase_app);
+
+            const email = localStorage.getItem("email")
+            console.log(email);
+
+            const s = await getDoc(doc(db, "users", `${email}`))
+            console.log(s);
+
+            setUser(s.data())
+
+        })();
+    }, []);
+    
+    useEffect(() => {
+            getTutorial();
         
-            getTutorial()
-            console.log(tutorials);
-
-
-        }, []
-    )
-
-    let headers = {
-        Accept: "application/json", // Example header
-        "Content-Type": "application/json",
-        'Authorization': `${token}`
-    };
+    }, []);
 
     const uploadImage = async () => {
         const metadata = {
@@ -62,41 +62,43 @@ export default function page() {
 
     const createTutotial = async () => {
         if (title && description && file) {
-            const img = await uploadImage()
-            await fetch(`${process.env.NEXT_PUBLIC_URL}/tutorial/addTutorial`, {
-                headers: headers,
-                method: "POST",
-                body: JSON.stringify({
-                    "title": title,
-                    "description": description,
-                    "image": img,
-                    "topic": params.topic
-                })
+            console.log(params.topic);
+            
+            const image = await uploadImage()
+            const res = await setDoc(doc(db, `${params.topic}`, title), {
+                description,
+                image
             })
+
 
         }
     }
 
     const getTutorial = () => {
         (async () => {
-            const url = `${process.env.NEXT_PUBLIC_URL}/tutorial/getTutorials?topic=${params.topic}`;
-
-            const data = await fetch(
-                url, {
-                headers: headers,
-                method: "GET",
-
-            }
+            const queri = query(collection(db, `${params.topic}`),)
+            const docs = await getDocs(queri)
+            let ds: any[] = []
+            docs.forEach(
+                (e) => {
+                    e.id
+                    let { description, image, } = e.data()
+                    ds.push(
+                        {
+                            description, image, title: e.id
+                        }
+                    )
+                }
             )
-            let ddd =(await data.json());
-            console.log(ddd);
-            
-            setTutorials(ddd)
+            console.log(ds);
+
+            setTutorials(ds)
         })()
+
     }
 
-    return <main>
-        {userType == "1" && !add ?
+    return <>{user && <main>
+        {user["type"] && !add ?
             <div className="btn" onClick={
                 () => {
                     setAdd(true)
@@ -150,8 +152,6 @@ export default function page() {
 
                     <button onClick={
                         async () => {
-                            console.log("Hi");
-
                             await createTutotial()
                             await getTutorial()
                             setAdd(false)
@@ -166,10 +166,10 @@ export default function page() {
         <div className="tutorials-list">
             {(tutorials && !add) && (
                 <div className="tutorials-list">
-                    {tutorials.map((e) => {
+                    {tutorials.map((e:any) => {
                         return (
-                            <Link className="tuto"  href={`/home/tutorials/${params.topic}/${e["id"]}`}>
-                                <Image className="tuto-img" src={e["image"]} alt="img"  width={200} height={200}/>
+                            <Link className="tuto" href={`/home/tutorials/${params.topic}/${e["title"]}`}>
+                                <Image className="tuto-img" src={e["image"]} alt="img" width={200} height={200} />
                                 <h2>{e["title"]}</h2>
                                 <h4>{e["description"]}</h4>
                             </Link>
@@ -178,5 +178,5 @@ export default function page() {
                 </div>
             )}
         </div>
-    </main>
+    </main>}</>
 }

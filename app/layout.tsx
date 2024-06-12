@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata = {
+  title:"cad",
   parameters: {
     layout: 'centered',
     nextjs: {

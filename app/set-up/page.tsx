@@ -5,8 +5,13 @@ import back from "../assets/images/back.png"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
+import firebase_app from "../firebsae-config"
+import { getFirestore, setDoc, doc } from "firebase/firestore"
 export default function page() {
+  const auth = getAuth(firebase_app)
+  const db = getFirestore(firebase_app)
+
   const [seePassword, setPasswordObs] = useState(false)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -113,45 +118,22 @@ export default function page() {
             console.log((((isAdmin && code == c) || (!isAdmin))));
 
             if (!(password == "" && name == "" && cellule == "" && email == "") && validateEmail(email) && password.length >= 8 && (((isAdmin && code == c) || (!isAdmin)))) {
+              try {
+                const u = await createUserWithEmailAndPassword(auth, email, password)
+                const res = await setDoc(doc(db, "users", `${u.user.email}`), {
+                  "uid": u.user.uid,
+                  "type": isAdmin
+                })
 
-              let res = await fetch(`${process.env.NEXT_PUBLIC_URL}/signUp`, {
-                method: "POST",
-                headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                  "name": name,
-                  "email": email,
-                  "password": password,
-                  "cellule": cellule,
-                  "userType": isAdmin ? 1 : 0
-                }),
-              })
-
-
-
-              let data = await res.json()
-
-              if (data == "Invalid email or password" || data == "Email address is already in use.") {
-                setErr(true)
-              } else {
                 if (typeof window !== 'undefined') {
-                  localStorage.setItem("token", data["token"])
-                  localStorage.setItem("id", data["id"])
-                  localStorage.setItem("type", data["type"])
-                  console.log(data["token"], data["id"], data["type"]);
+                  localStorage.setItem("email", `${u.user.email}`)
                   router.push("/home")
+
+
+
                 }
-              }
-
-
-            } else {
-              if (!validateEmail(email)) {
-                setEmailErr(true)
-              }
-              if (password.length < 8) {
-                setPassErr(false)
+              } catch (e) {
+                setErr(true)
               }
             }
           }

@@ -14,7 +14,7 @@ export default function page() {
       router.push("/home");
     }
   }, []); 
-    return <main> HI  </main>
+    return <main>  </main>
 }
 
 

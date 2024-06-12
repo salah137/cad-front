@@ -5,8 +5,11 @@ import back from "../assets/images/back.png"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
+import firebase_app from "../firebsae-config"
 
 export default function page() {
+    const auth = getAuth(firebase_app)
 
     const [seePassword, setPasswordObs] = useState(false)
     const [email, setEmail] = useState("")
@@ -54,32 +57,16 @@ export default function page() {
             <div>
                 <button className="login" onClick={
                     async () => {
+                        try {
+                            const user = await signInWithEmailAndPassword(auth, email, password)
 
-                        let res = await fetch(`${process.env.NEXT_PUBLIC_URL}/signIn`, {
-                            method: "POST",
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(
-                                {
-                                    "email": email,
-                                    "password": password
-                                }
-                            )
-                        })
-
-                        let data = await res.json()
-
-                        if (data == "Invalid email or password") {
+                            if (typeof window !== 'undefined') {
+                                localStorage.setItem("email", `${user.user.email}`)
+                                router.push("/home")
+                            }
+                        } catch (e) {
                             setErr(true)
-                        } else {
-                            if (typeof window !== 'undefined'){
-                            localStorage.setItem("token", data["token"])
-                            localStorage.setItem("id", data["id"])
-                            localStorage.setItem("type", data["type"])
-                            router.push("/home")
-                        }}
+                        }
 
                     }
                 }>

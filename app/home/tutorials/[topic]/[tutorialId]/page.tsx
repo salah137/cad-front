@@ -1,5 +1,6 @@
 "use client"
 
+import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { IoMdAdd } from "react-icons/io"
 import Image from "next/image"
@@ -12,11 +13,13 @@ import { PiFilePdfBold } from "react-icons/pi"
 import ReactPlayer from "react-player"
 import { AiOutlineLoading3Quarters } from "react-icons/ai"
 import Link from "next/link"
+import { collection, doc, getDocs, getFirestore, query, setDoc } from "firebase/firestore"
+import { getDoc } from "firebase/firestore"
 
-import { useParams } from "next/navigation"
 
 export default function page() {
     const params = useParams<{ topic: string, tutorialId: string }>()
+    const db = getFirestore(firebase_app)
 
     const [add, setAdd] = useState(false)
     const [image, setImage] = useState<any>()
@@ -27,24 +30,15 @@ export default function page() {
 
     const [pdfs, setPdfs] = useState<any>()
 
-    const [items, setItems] = useState([])
+    const [items, setItems] = useState<any>()
 
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
 
     const [pub, setPub] = useState(false)
 
-    const [userType, setUserType] = useState<any>()
 
-    const [id, setId] = useState<any>()
-    const [token, setToken] = useState<any>()
-
-
-    let headers = {
-        Accept: "application/json", // Example header
-        "Content-Type": "application/json",
-        'Authorization': `${token}`
-    };
+    const [user, setUser] = useState<any>()
 
     const uploadImage = async () => {
         const metadata = {
@@ -86,39 +80,51 @@ export default function page() {
 
     const getItems = () => {
         (async () => {
+            console.log("dddd");
 
-
-            const url = `${process.env.NEXT_PUBLIC_URL}/tutorial/getTutorial?id=${Number(params.tutorialId)}`;
-
-            const data = await fetch(
-                url, {
-                headers: headers,
-                method: "GET",
-
-            }
+            const qurie = query(collection(db, `${params.topic}/${params.tutorialId}/videos`))
+            const docs = await getDocs(qurie)
+            let ds: any[] = []
+            docs.forEach(
+                (e) => {
+                    e.id
+                    let { image } = e.data()
+                    ds.push(
+                        {
+                            image, title: e.id
+                        }
+                    )
+                }
             )
-            let ddd = (await data.json());
-            console.log(ddd);
+            console.log("dddd");
+            
+            setItems(ds)
 
-            setItems(ddd)
         })()
     }
 
-    useEffect(
-        () => {
-            if (typeof window !== 'undefined') {
-                setUserType(localStorage.getItem('type'));
-                setId(Number(localStorage.getItem("id")))
-                setToken(localStorage.getItem("token"))
-            }
 
-            getItems()
-        }, []
-    )
+    useEffect(() => {
+        (async () => {
+            const db = getFirestore(firebase_app);
 
+            const email = localStorage.getItem("email")
+            console.log(email);
 
-    return <main>
-        {userType == "1" && !add ?
+            const s = await getDoc(doc(db, "users", `${email}`))
+            console.log(s);
+
+            setUser(s.data())
+
+        })();
+    }, []);
+
+    useEffect(() => {
+            getItems();
+    }, []);
+
+    return <> {user && <main>
+        {user["type"] && !add ?
             <div className="btn" onClick={
                 () => {
                     setAdd(true)
@@ -238,22 +244,13 @@ export default function page() {
                                 const vid = await uploadvideo()
                                 const pdf = await uploadDocs()
 
-                                await fetch(`${process.env.NEXT_PUBLIC_URL}/tutorial/addTutorialElement`,
-                                    {
-                                        method: "POST",
-                                        headers,
-                                        body: JSON.stringify(
-                                            {
-                                                "tutorialId": Number(params.tutorialId),
-                                                "title": title,
-                                                "description": description,
-                                                "image": img,
-                                                "video": vid,
-                                                "files": pdf
-                                            }
-                                        )
-                                    }
-                                )
+                                const qurie = query(collection(db, `${params.topic}/${params.tutorialId}/videos`))
+                                await setDoc(doc(db, `${params.topic}/${params.tutorialId}/videos`, title), {
+                                    video: vid,
+                                    image: img,
+                                    pdf: pdf,
+                                    description: description
+                                })
                                 getItems()
                                 setPub(false)
                                 setAdd(false)
@@ -270,8 +267,8 @@ export default function page() {
             (items && !add) && <div className="tuto-items-list">
                 {
                     items.map(
-                        (e) => {
-                            return <Link className="tuto-item" href={`/home/tutorials/${params.topic}/${params.tutorialId}/${e["id"]}`}>
+                        (e: any) => {
+                            return <Link className="tuto-item" href={`/home/tutorials/${params.topic}/${params.tutorialId}/${e["title"]}`}>
                                 <Image src={e["image"]} alt="dd" height={200}
                                     width={200} />
                                 <h2>{e["title"]}</h2>
@@ -281,5 +278,5 @@ export default function page() {
                 }
             </div>
         }
-    </main>
+    </main>}</>
 }

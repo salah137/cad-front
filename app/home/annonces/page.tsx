@@ -6,9 +6,12 @@ import { useEffect, useState } from "react";
 import { FaFileUpload } from "react-icons/fa";
 import Image from "next/image";
 import { BiExit } from "react-icons/bi";
-import { getDownloadURL, getStorage, ref, uploadBytesResumable, uploadBytes } from 'firebase/storage'
+import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage'
+import { getFirestore, getDoc, doc, collection, query, DocumentData, getDocs, setDoc } from "firebase/firestore";
+import { headers } from "next/headers";
 
 export default function page() {
+    const db = getFirestore(firebase_app);
 
     const [add, setAdd] = useState(false)
     const [image, setImage] = useState<any>()
@@ -17,42 +20,56 @@ export default function page() {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
 
-    const [annonces, setAnnonces] = useState([])
+    const [annonces, setAnnonces] = useState<any>()
+    const [user, setUser] = useState<any>({})
 
-    const [userType, setUserType] = useState<any>();
-    const [idd, setIdd] = useState<any>()
-    const [token, setToken] = useState<any>()
-    const userTypeNumber = userType ? parseInt(userType) : null;
 
-    let headers = {
-        Accept: "application/json", // Example header
-        "Content-Type": "application/json",
-        'Authorization': `${token}`
-    };
+
     const getData = () => {
 
 
         (async () => {
-            let res = await fetch(`${process.env.NEXT_PUBLIC_URL}/annonce/getAnnonce`, {
-                method: "GET",
-                headers: headers,
-            }
+            const queri = query(collection(db, 'annonces'),)
+            const docs = await getDocs(queri)
+            let ds: any[] = []
+            docs.forEach(
+                (e) => {
+                    e.id
+                    let { description, image } = e.data()
+                    ds.push(
+                        {
+                            description, image, title: e.id
+                        }
+                    )
+                }
             )
-            setAnnonces(await res.json())
+            console.log(ds);
+
+            setAnnonces(ds)
         })()
     }
 
-    useEffect(
-        () => {
-            if (typeof window !== 'undefined'){
-                setUserType(localStorage.getItem('type'));
-                setIdd(Number(localStorage.getItem("id")))
-                setToken(localStorage.getItem("token"));
-        
-            }
-            getData()
-        }, []
-    )
+    useEffect(() => {
+
+        (async () => {
+            const db = getFirestore(firebase_app);
+
+            const email = localStorage.getItem("email")
+            console.log(email);
+
+            const s = await getDoc(doc(db, "users", `${email}`))
+            console.log(s);
+
+            setUser(s.data())
+
+        })();
+    }, []);
+
+    useEffect(() => {
+        getData();
+
+    }, []);
+
 
     const uploadImage = async () => {
         const metadata = {
@@ -72,26 +89,20 @@ export default function page() {
 
     const shareAnnonce = async () => {
         if (title && description && file) {
-
-
             const url = await uploadImage()
-            await fetch(`${process.env.NEXT_PUBLIC_URL}/annonce/addAnnonce`, {
-                method: "POST",
-                headers: headers,
-                body: JSON.stringify({
-                    "title": title,
-                    "description": description,
-                    "files": url,
-                    "authorId": idd
-                }),
+
+            const res = await setDoc(doc(db, "annonces", title), {
+                description,
+                image: url
             })
+
             getData()
             setAdd(false)
         }
     }
 
-    return <main>
-        {userTypeNumber == 1 && !add ?
+    return <>{user && <main>
+        {user["type"] && !add ?
             <div className="btn" onClick={
                 () => {
                     setAdd(true)
@@ -161,17 +172,17 @@ export default function page() {
 
             }
         }>
-            {
+            {annonces &&
                 annonces.map(
-                    (e) => {
+                    (e: any) => {
                         return <div className="annonce-item">
                             <h1>{e["title"]} c </h1>
                             <p>{e["description"]}</p>
-                            <Image src={e["files"]} alt="ann-img" width={600} height={350} className="ann-img" />
+                            <Image src={e["image"]} alt="ann-img" width={600} height={350} className="ann-img" />
                         </div>
 
                     }
                 )
             }</div>
-    </main>
+    </main>}</>
 }
