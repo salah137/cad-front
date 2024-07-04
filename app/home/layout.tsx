@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <div className={`main ${inter.className}`}>
       <div className="nav">
-        <div
+        <div className="btns-nav"
           onClick={() => {
             router.push("/home/tutorials");
           }}
@@ -27,7 +27,7 @@ export default function RootLayout({
           <h2>Tutorials</h2>
         </div>
 
-        <div
+        <div className="btns-nav"
           onClick={() => {
             router.push("/home/annonces");
           }}
@@ -39,7 +39,7 @@ export default function RootLayout({
         <div className="sep">
         </div>
         
-        <div
+        <div className="btns-nav"
           onClick={() => {
             localStorage.removeItem("email");
             router.push("/");
