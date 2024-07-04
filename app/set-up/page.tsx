@@ -8,7 +8,10 @@ import { useRouter } from "next/navigation"
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
 import firebase_app from "../firebsae-config"
 import { getFirestore, setDoc, doc } from "firebase/firestore"
+import ensa from "../assets/images/ensa.png"
+
 export default function page() {
+  
   const auth = getAuth(firebase_app)
   const db = getFirestore(firebase_app)
 
@@ -33,7 +36,8 @@ export default function page() {
   return <main>
     <div className="form">
 
-      <div>
+      <div> 
+        <Image src={ensa} alt="ensa"/>
         <h1>Be in our world</h1>
         <h3>grow your skills</h3>
       </div>
