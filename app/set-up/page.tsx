@@ -37,7 +37,7 @@ export default function page() {
     <div className="form">
 
       <div> 
-        <Image src={ensa} alt="ensa"/>
+        <Image src={ensa} alt="ensa" className="ensa_image"/>
         <h1>Be in our world</h1>
         <h3>grow your skills</h3>
       </div>

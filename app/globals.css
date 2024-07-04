@@ -149,3 +149,8 @@ button{
     flex-direction: column;
   }
 }
+
+.ensa_image{
+  width: 30vw;
+  height: 10vh;
+}

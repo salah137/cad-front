@@ -7,6 +7,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import firebase_app from "../firebsae-config"
+import ensa from "../assets/images/ensa.png"
 
 export default function page() {
     const auth = getAuth(firebase_app)
@@ -19,6 +20,7 @@ export default function page() {
 
     return <main>
         <div className="form">
+        <Image src={ensa} alt="ensa" className="ensa_image"/>
 
             <div>
                 <h1>Be in our world</h1>
