@@ -460,6 +460,10 @@
         align-items: center;
         font-size: 0.70rem;
     }
+
+    .sep{
+        display: none;
+    }
 }
 
 
@@ -473,4 +477,8 @@
 a{
     text-decoration: none;
     color: inherit;
+}
+
+.sep{
+    height: 100%;
 }
