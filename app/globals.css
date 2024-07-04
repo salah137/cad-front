@@ -152,6 +152,7 @@ button{
 
 .logos{
   display: flex;
+  justify-content: space-around;
 }
 
 .ensa_image{
