@@ -19,12 +19,9 @@ export default function page() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [name, setName] = useState("")
-  const [cellule, setCellule] = useState("")
   const [err, setErr] = useState(false)
   const [passErr, setPassErr] = useState(false)
   const [emailErr, setEmailErr] = useState(false)
-  const [isAdmin, setAdmin] = useState(false)
-  const [code, setCode] = useState("")
   const router = useRouter()
   const [c, setC] = useState<any>()
   useEffect(
@@ -83,29 +80,6 @@ export default function page() {
           }
         } value={name} />
 
-        <input type="text" placeholder="your cellule" value={cellule} onChange={
-          (e) => {
-            setCellule(e.target.value)
-          }
-        } />
-
-        <div className="is-admin">
-          <input type="checkbox" checked={isAdmin} onChange={() => {
-            setAdmin((s) => !s)
-          }}></input>
-          <h3>admin</h3>
-        </div>
-
-        {
-          isAdmin ?
-            <input type="text" placeholder="your code" onChange={
-              (e) => {
-                setCode(e.target.value)
-
-              }
-            } value={code} />
-            : <></>
-        }
       </div>
       {err ? <p style={
         {
@@ -119,14 +93,13 @@ export default function page() {
             console.log("hi");
             console.log(c);
 
-            console.log((((isAdmin && code == c) || (!isAdmin))));
 
-            if (!(password == "" && name == "" && cellule == "" && email == "") && validateEmail(email) && password.length >= 8 && (((isAdmin && code == c) || (!isAdmin)))) {
+            if (!(password == "" && name == "" && email == "") && validateEmail(email) && password.length >= 8 ) {
               try {
                 const u = await createUserWithEmailAndPassword(auth, email, password)
                 const res = await setDoc(doc(db, "users", `${u.user.email}`), {
                   "uid": u.user.uid,
-                  "type": isAdmin
+                  "type": false
                 })
 
                 if (typeof window !== 'undefined') {
