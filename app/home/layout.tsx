@@ -39,6 +39,18 @@ export default function RootLayout({
               <BiNews />
               <h2>News</h2>
             </div>
+            
+            <div onClick={
+              localStorage.removeItem()
+                       ()=>{
+                        localStorage.removeItem("email")
+                        router.push("/")
+                      }
+            }>
+              <BiNews />
+              <h2>Log Out</h2>
+            </div>
+            
           </div>
           {children}
 

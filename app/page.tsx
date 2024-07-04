@@ -8,7 +8,7 @@ export default function page() {
   const router = useRouter()
  
   useEffect(() => {
-    if (!localStorage.getItem("token")) {
+    if (!localStorage.getItem("email")) {
       router.push("/auth");
     } else {
       router.push("/home");
