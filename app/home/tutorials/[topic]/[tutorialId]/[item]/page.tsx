@@ -35,9 +35,7 @@ export default function page() {
                         height="50vh"
                         url={iteme["video"]}
                         controls={true}
-                        // light is usefull incase of dark mode
                         light={false}
-                        // picture in picture
                         pip={true}
                     />
                     <h1>{iteme["title"]}</h1>

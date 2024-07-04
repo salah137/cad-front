@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import firebase_app from "../firebsae-config"
 import ensa from "../assets/images/ensa.png"
+import cad from "../assets/images/cad-logo.png"
 
 export default function page() {
     const auth = getAuth(firebase_app)
@@ -20,7 +21,12 @@ export default function page() {
 
     return <main>
         <div className="form">
-        <Image src={ensa} alt="ensa" className="ensa_image"/>
+
+        <div className="logos">
+          <Image src={ensa} alt="ensa" className="ensa_image" />
+          <Image src={cad} alt="cad" className="ensa_image" />
+
+        </div>
 
             <div>
                 <h1>Be in our world</h1>

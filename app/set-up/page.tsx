@@ -9,9 +9,10 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
 import firebase_app from "../firebsae-config"
 import { getFirestore, setDoc, doc } from "firebase/firestore"
 import ensa from "../assets/images/ensa.png"
+import cad from "../assets/images/cad-logo.png"
 
 export default function page() {
-  
+
   const auth = getAuth(firebase_app)
   const db = getFirestore(firebase_app)
 
@@ -33,8 +34,12 @@ export default function page() {
   return <main>
     <div className="form">
 
-      <div> 
-        <Image src={ensa} alt="ensa" className="ensa_image"/>
+      <div>
+        <div className="logos">
+          <Image src={ensa} alt="ensa" className="ensa_image" />
+          <Image src={cad} alt="cad" className="ensa_image" />
+
+        </div>
         <h1>Be in our world</h1>
         <h3>grow your skills</h3>
       </div>
@@ -94,7 +99,7 @@ export default function page() {
             console.log(c);
 
 
-            if (!(password == "" && name == "" && email == "") && validateEmail(email) && password.length >= 8 ) {
+            if (!(password == "" && name == "" && email == "") && validateEmail(email) && password.length >= 8) {
               try {
                 const u = await createUserWithEmailAndPassword(auth, email, password)
                 const res = await setDoc(doc(db, "users", `${u.user.email}`), {
@@ -105,9 +110,6 @@ export default function page() {
                 if (typeof window !== 'undefined') {
                   localStorage.setItem("email", `${u.user.email}`)
                   router.push("/home")
-
-
-
                 }
               } catch (e) {
                 setErr(true)

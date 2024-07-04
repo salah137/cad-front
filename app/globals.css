@@ -150,7 +150,12 @@ button{
   }
 }
 
+.logos{
+  display: flex;
+}
+
 .ensa_image{
-  width: 30vw;
+  width: 10vw;
   height: 10vh;
 }
+
