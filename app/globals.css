@@ -1,18 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
 
-body{
+body {
   background-color: burlywood;
   margin: 0;
   height: 100vh;
 }
 
-main{
+main {
   display: flex;
   justify-self: right;
   align-items: center;
 }
 
-.form{
+.form {
   font-family: "Kaushan Script", cursive;
   font-weight: 400;
   font-style: normal;
@@ -21,22 +21,23 @@ main{
   text-align: center;
 }
 
-.back{
+.back {
   width: 70vw;
   height: 100vh;
   object-fit: fill;
 }
 
-.form > div> h1{
+.form>div>h1 {
   color: #4E4E4E;
   margin: 0;
 }
 
-.form > h3{
+.form>h3 {
   margin: 0;
 }
 
-.form > div> input, .form > div> .password> input{
+.form>div>input,
+.form>div>.password>input {
   margin: 10px;
   height: 30px;
   width: 70%;
@@ -47,21 +48,21 @@ main{
   padding: 5px;
 }
 
-.password> input{
+.password>input {
   width: 50%;
   margin: 0;
   border: none;
   outline: none;
 }
 
-.password > span{
+.password>span {
   display: inline-block;
   background-color: white;
   height: 30px;
   width: 20%;
 }
 
-.password{
+.password {
   background-color: white;
   display: flex;
   align-items: center;
@@ -71,11 +72,13 @@ main{
   margin-left: 4vw;
 }
 
-.form > div> input:focus,.password>input:focus, .inps>input:focus{
+.form>div>input:focus,
+.password>input:focus,
+.inps>input:focus {
   font-family: sans-serif;
 }
 
-.login{
+.login {
   margin-top: 20px;
   background-color: #74191E;
 }
@@ -85,7 +88,7 @@ main{
   cursor: pointer;
 }
 
-.set_up{
+.set_up {
   background-color: #09253B;
 }
 
@@ -94,7 +97,7 @@ main{
   cursor: pointer;
 }
 
-button{
+button {
   width: 75%;
   height: 5vh;
   font-family: "Kaushan Script", cursive;
@@ -105,70 +108,73 @@ button{
   outline: none;
 }
 
-.or{
+.or {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.or>p{
+.or>p {
   margin: 5px;
 }
-.line{
+
+.line {
   height: 2px;
   width: 25%;
   background-color: black;
 }
 
-.form > h3{
+.form>h3 {
   margin-top: 15px;
 }
 
-.is-admin{
+.is-admin {
   display: flex;
   justify-content: center;
 }
 
 
 @media only screen and (max-width: 900px) {
-  main{
+  main {
     display: flex;
     flex-direction: column-reverse;
     width: 100vw;
   }
-  .back{
+
+  .back {
     height: 40vh;
     width: 100vw;
   }
-  .form{
+
+  .form {
     width: 100vw;
   }
 
-  .main{
+  .main {
     display: flex;
     flex-direction: column;
   }
-  .logos{
+
+  .logos {
     position: fixed;
-  width: 99%;
+    width: 99%;
     display: flex;
     justify-content: space-between;
-   bottom: 50vh;
+    bottom: 50vh;
   }
-  
-  
+
+
 }
 
-.logos{
+.logos {
   position: fixed;
-width: 30%;
+  width: 30%;
   display: flex;
   justify-content: space-between;
- bottom: 90vh;
+  bottom: 90vh;
 }
 
-.ensa_image{
+.ensa_image {
   width: 10vw;
   height: 10vh;
 }
-
