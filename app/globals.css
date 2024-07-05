@@ -148,6 +148,15 @@ button{
     display: flex;
     flex-direction: column;
   }
+  .logos{
+    position: fixed;
+  width: 30%;
+    display: flex;
+    justify-content: space-between;
+   bottom: 60vh;
+  }
+  
+  
 }
 
 .logos{
