@@ -151,9 +151,11 @@ button{
 }
 
 .logos{
+  position: fixed;
+
   display: flex;
   justify-content: space-around;
-  padding-bottom: 10vh;
+ bottom: 90vh;
 }
 
 .ensa_image{
