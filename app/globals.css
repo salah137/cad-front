@@ -152,9 +152,9 @@ button{
 
 .logos{
   position: fixed;
-
+width: 30%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
  bottom: 90vh;
 }
 
