@@ -163,6 +163,10 @@ button {
     bottom: 50vh;
   }
 
+  .ensa_image {
+    width: 20vw;
+    height: 7vh;
+  }
 
 }
 
