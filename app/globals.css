@@ -150,10 +150,10 @@ button{
   }
   .logos{
     position: fixed;
-  width: 30%;
+  width: 99%;
     display: flex;
     justify-content: space-between;
-   bottom: 60vh;
+   bottom: 50vh;
   }
   
   
