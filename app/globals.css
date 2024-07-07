@@ -169,7 +169,7 @@ button {
   }
 
   .logos {
-    position: fixed;
+    position: absolute;
     width: 99%;
     display: flex;
     justify-content: space-between;
