@@ -182,3 +182,41 @@ button {
   }
 
 }
+
+footer{
+  width: 100vw;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+.social{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+}
+
+.sc{
+  width: 5vh;
+  height: 5vh;
+}
+
+.contact{
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  width: 40vw;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius:15px ;
+  justify-content: space-around;
+}
+
+.email{
+  color: var(--b-color);
+  text-shadow: 0 0 1px black;
+}
