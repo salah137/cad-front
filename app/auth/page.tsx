@@ -36,12 +36,12 @@ export default function page() {
             </div>
 
             <div>
-                <input type="text" placeholder="your email" value={email} onChange={(e) => {
+                <input type="text" placeholder="Your Email" value={email} onChange={(e) => {
                     setEmail(e.target.value)
                 }} />
 
                 <div className="password">
-                    <input type={seePassword ? "text" : "password"} placeholder="your password" onChange={(e) => {
+                    <input type={seePassword ? "text" : "password"} placeholder="Your Password" onChange={(e) => {
                         setPassword(e.target.value)
                     }} />
                     <span className="" onClick={() => {
@@ -102,7 +102,7 @@ export default function page() {
             <h1>Contacte Us : </h1>
             <div className="contact">
                 <div className="infos">
-                    <h2 className="email">boukairsalah@gmail.com</h2>
+                    <h2 className="email">clubartsetdesign@gmail.com</h2>
                 </div>
 
                 <div className="social">

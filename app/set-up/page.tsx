@@ -139,7 +139,7 @@ export default function page() {
             <h1>Contacte Us : </h1>
             <div className="contact">
                 <div className="infos">
-                    <h2 className="email">boukairsalah@gmail.com</h2>
+                    <h2 className="email">clubartsetdesign@gmail.com</h2>
                 </div>
 
                 <div className="social">
