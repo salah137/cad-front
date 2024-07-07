@@ -147,6 +147,43 @@ button {
   height: 10vh;
 }
 
+footer{
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+.social{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+}
+
+.sc{
+  width: 5vh;
+  height: 5vh;
+}
+
+.contact{
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  width:25vw;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius:15px ;
+  justify-content: space-around;
+}
+
+.email{
+  color: rgb(0, 110, 255);
+  text-shadow: 0 0 1px black;
+}
+
 @media only screen and (max-width: 900px) {
   main {
     display: flex;
@@ -196,39 +233,3 @@ button {
 
 }
 
-footer{
-  width: fit-content;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 100%;
-}
-
-.social{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-self: center;
-}
-
-.sc{
-  width: 5vh;
-  height: 5vh;
-}
-
-.contact{
-  background-color: white;
-  display: flex;
-  justify-content: center;
-  width:25vw;
-  padding: 20px;
-  border: 1px solid black;
-  border-radius:15px ;
-  justify-content: space-around;
-}
-
-.email{
-  color: rgb(0, 110, 255);
-  text-shadow: 0 0 1px black;
-}
