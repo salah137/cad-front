@@ -182,6 +182,7 @@ footer{
 .email{
   color: rgb(0, 110, 255);
   text-shadow: 0 0 1px black;
+  font-size: 1.15em;
 }
 
 @media only screen and (max-width: 900px) {
