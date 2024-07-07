@@ -9,6 +9,8 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import firebase_app from "../firebsae-config"
 import ensa from "../assets/images/ensa.png"
 import cad from "../assets/images/cad-logo.png"
+import insta from "../assets/images/insta.png"
+import linked from "../assets/images/linkedin.png"
 
 export default function page() {
     const auth = getAuth(firebase_app)
@@ -96,6 +98,20 @@ export default function page() {
             </div>
 
             <h3>contact us</h3>
+            <footer>
+            <h1>Contacte Us : </h1>
+            <div className="contact">
+                <div className="infos">
+                    <h2 className="email">boukairsalah@gmail.com</h2>
+                </div>
+
+                <div className="social">
+                   <a href="https://www.instagram.com/club_arts_et_design/" target="_blank"><Image src={insta} alt="insta" className="sc" /></a> 
+                    <a href="https://www.linkedin.com/company/club-art-design/" target="_blank"><Image src={linked} alt="face" className="sc" /></a>
+
+                </div>
+            </div>
+        </footer>
         </div>
 
         <Image src={back} alt="club" className="back" />
