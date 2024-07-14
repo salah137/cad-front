@@ -106,10 +106,10 @@
 }
 
 .nav {
-    background-color: #09253B;
+    background-color: #b3864b;
     display: flex;
     flex-direction: column;
-    color: wheat;
+    color: #09253B;
     height: 100vh;
     width: 20vw;
 }
