@@ -21,14 +21,16 @@ export default function page() {
     const [err, setErr] = useState(false)
     const router = useRouter()
 
-    return <main>
+    return <main style={{
+        backgroundColor: "#b3864b"
+    }}>
         <div className="form">
 
-        <div className="logos">
-          <Image src={ensa} alt="ensa" className="ensa_image" />
-          <Image src={cad} alt="cad" className="ensa_image" />
+            <div className="logos">
+                <Image src={ensa} alt="ensa" className="ensa_image" />
+                <Image src={cad} alt="cad" className="ensa_image" />
 
-        </div>
+            </div>
 
             <div>
                 <h1>Be in our world</h1>
@@ -97,19 +99,19 @@ export default function page() {
                 </button></Link>
             </div>
             <footer>
-            <h1>Contacte Us : </h1>
-            <div className="contact">
-                <div className="infos">
-                    <h2 className="email">clubartsetdesign@gmail.com</h2>
-                </div>
+                <h1>Contacte Us : </h1>
+                <div className="contact">
+                    <div className="infos">
+                        <h2 className="email">clubartsetdesign@gmail.com</h2>
+                    </div>
 
-                <div className="social">
-                   <a href="https://www.instagram.com/club_arts_et_design/" target="_blank"><Image src={insta} alt="insta" className="sc" /></a> 
-                    <a href="https://www.linkedin.com/company/club-art-design/" target="_blank"><Image src={linked} alt="face" className="sc" /></a>
+                    <div className="social">
+                        <a href="https://www.instagram.com/club_arts_et_design/" target="_blank"><Image src={insta} alt="insta" className="sc" /></a>
+                        <a href="https://www.linkedin.com/company/club-art-design/" target="_blank"><Image src={linked} alt="face" className="sc" /></a>
 
+                    </div>
                 </div>
-            </div>
-        </footer>
+            </footer>
         </div>
 
         <Image src={back} alt="club" className="back" />

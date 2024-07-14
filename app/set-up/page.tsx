@@ -33,7 +33,9 @@ export default function page() {
     }, []
   )
 
-  return <main>
+  return <main style={{
+    backgroundColor : "#b3864b"
+  }}>
     <div className="form">
 
       <div>
