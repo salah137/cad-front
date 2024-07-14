@@ -5,9 +5,10 @@ body {
   margin: 0;
   height: 100vh;
 }
-#b3864b
+
 main {
   display: flex;
+  flex-direction: row;
   justify-self: right;
   align-items: center;
 }
