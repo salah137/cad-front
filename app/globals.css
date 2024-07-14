@@ -11,6 +11,8 @@ main {
   flex-direction: row;
   justify-self: right;
   align-items: center;
+  color: wheat;
+
 }
 
 .form {
@@ -39,6 +41,7 @@ main {
 
 .form>div>input,
 .form>div>.password>input {
+
   margin: 10px;
   height: 30px;
   width: 70%;
@@ -90,11 +93,11 @@ main {
 }
 
 .set_up {
-  background-color: #09253B;
+  background-color: #b3864b;
 }
 
 .set_up:hover {
-  background-color: #04111b;
+  background-color: #8a673a;
   cursor: pointer;
 }
 
@@ -110,6 +113,7 @@ button {
 }
 
 .or {
+  color: wheat;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -127,6 +131,7 @@ button {
 
 .form>h3 {
   margin-top: 15px;
+  color: wheat;
 }
 
 .is-admin {
@@ -141,6 +146,7 @@ button {
   display: flex;
   justify-content: space-between;
   bottom: 90vh;
+  color: wheat;
 }
 
 .ensa_image {
@@ -155,6 +161,7 @@ footer{
   align-items: center;
   flex-direction: column;
   height: 100%;
+  color: wheat;
 }
 
 .social{

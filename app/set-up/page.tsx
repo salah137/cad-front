@@ -78,7 +78,7 @@ export default function page() {
 
         </div>
         {passErr ?
-          <h3>password shouldd have more than 8 characters</h3> : <></>}
+          <h3>password should have more than 8 characters</h3> : <></>}
 
         <input type="text" placeholder="your name" onChange={
           (e) => {

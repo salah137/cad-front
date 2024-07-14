@@ -96,8 +96,6 @@ export default function page() {
                     set up
                 </button></Link>
             </div>
-
-            <h3>contact us</h3>
             <footer>
             <h1>Contacte Us : </h1>
             <div className="contact">
