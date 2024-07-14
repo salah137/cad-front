@@ -94,11 +94,11 @@ main {
 }
 
 .set_up {
-  background-color: #b3864b;
+  background-color: #09253B;
 }
 
 .set_up:hover {
-  background-color: #8a673a;
+  background-color: #09253B;
   cursor: pointer;
 }
 
