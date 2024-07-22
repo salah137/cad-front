@@ -39,15 +39,6 @@ export default function RootLayout({
 
         <div className="btns-nav"
           onClick={() => {
-            router.push("/home/tutorials");
-          }}
-        >
-          <SiCoursera />
-          <h2>Tutorials</h2>
-        </div>
-
-        <div className="btns-nav"
-          onClick={() => {
             router.push("/home/presentation");
           }}
         >
