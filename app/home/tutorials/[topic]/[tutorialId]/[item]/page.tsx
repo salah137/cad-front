@@ -40,13 +40,13 @@ export default function page() {
                     />
                     <h1>{iteme["title"]}</h1>
                     <div className="files">
-
+                        {iteme["pdf"] &&
                         <a href={iteme["pdf"]} target="_blank" rel="noopener noreferrer">
                             <div className="pdf">
                                 <FaFilePdf />
                                 <h3>Check our docs</h3>
                             </div>
-                        </a>
+                        </a>}
 
                         <div className="text">
                             <h1>{params.item}</h1>

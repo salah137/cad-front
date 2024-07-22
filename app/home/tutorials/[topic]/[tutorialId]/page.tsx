@@ -71,11 +71,13 @@ export default function page() {
 
 
     const uploadDocs = async () => {
-        const storage = getStorage(firebase_app)
-        const fileRef = ref(storage, `docs/${title}`)
-        uploadBytes(fileRef, pdfs)
-        await uploadBytes(fileRef, pdfs)
-        return (await getDownloadURL(fileRef));
+        if (pdfs) {
+            const storage = getStorage(firebase_app)
+            const fileRef = ref(storage, `docs/${title}`)
+            uploadBytes(fileRef, pdfs)
+            await uploadBytes(fileRef, pdfs)
+            return (await getDownloadURL(fileRef));
+        }
     }
 
     const getItems = () => {
@@ -97,7 +99,7 @@ export default function page() {
                 }
             )
             console.log("dddd");
-            
+
             setItems(ds)
 
         })()
@@ -120,7 +122,7 @@ export default function page() {
     }, []);
 
     useEffect(() => {
-            getItems();
+        getItems();
     }, []);
 
     return <> {user && <main>
