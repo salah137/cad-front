@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { SiCoursera } from "react-icons/si";
 import { BiNews } from "react-icons/bi";
 import "./style.css";
+import { PiPresentationFill } from "react-icons/pi";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,6 +27,7 @@ export default function RootLayout({
           <BiNews />
           <h2>News</h2>
         </div>
+
         <div className="btns-nav"
           onClick={() => {
             router.push("/home/tutorials");
@@ -35,10 +37,27 @@ export default function RootLayout({
           <h2>Tutorials</h2>
         </div>
 
+        <div className="btns-nav"
+          onClick={() => {
+            router.push("/home/tutorials");
+          }}
+        >
+          <SiCoursera />
+          <h2>Tutorials</h2>
+        </div>
+
+        <div className="btns-nav"
+          onClick={() => {
+            router.push("/home/presentation");
+          }}
+        >
+          <PiPresentationFill />
+          <h2>Presentation</h2>
+        </div>
 
         <div className="sep">
         </div>
-        
+
         <div className="btns-nav"
           onClick={() => {
             localStorage.removeItem("email");
