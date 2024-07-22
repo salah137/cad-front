@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { SiCoursera } from "react-icons/si";
 import { BiNews } from "react-icons/bi";
 import "./style.css";
-import { PiPresentationFill } from "react-icons/pi";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,19 +17,15 @@ export default function RootLayout({
 
   return (
     <div className={`main ${inter.className}`}>
-      <div className="btns-nav"
-        onClick={() => {
-          router.push("/home/annonces");
-        }}
-      >
-        <BiNews />
-        <h2>News</h2>
-      </div>
-
-      <div className="sep">
-      </div>
-
       <div className="nav">
+        <div className="btns-nav"
+          onClick={() => {
+            router.push("/home/annonces");
+          }}
+        >
+          <BiNews />
+          <h2>News</h2>
+        </div>
         <div className="btns-nav"
           onClick={() => {
             router.push("/home/tutorials");
@@ -41,27 +36,19 @@ export default function RootLayout({
         </div>
 
 
-        <div className="nav">
-          <div className="btns-nav"
-            onClick={() => {
-              router.push("/home/tutorials");
-            }}
-          >
-            <PiPresentationFill />
-            <h2>Presentation</h2>
-          </div>
+        <div className="sep">
         </div>
-
-          <div className="btns-nav"
-            onClick={() => {
-              localStorage.removeItem("email");
-              router.push("/");
-            }}
-          >
-            <h2>Log Out</h2>
-          </div>
+        
+        <div className="btns-nav"
+          onClick={() => {
+            localStorage.removeItem("email");
+            router.push("/");
+          }}
+        >
+          <h2>Log Out</h2>
         </div>
-        {children}
       </div>
-      );
+      {children}
+    </div>
+  );
 }
