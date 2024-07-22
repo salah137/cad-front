@@ -3,6 +3,7 @@
 
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
+import { Analytics } from "@vercel/analytics/react"
 
 export default function page() {
   const router = useRouter()
